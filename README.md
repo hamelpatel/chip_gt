@@ -1,6 +1,5 @@
--- Author: Amos Folarin                                               #
--- Organisation: KCL/SLaM                                             #
--- Email: amosfolarin@gmail.com                                       #
+Genotype Calling Pipeline
+==============================================================================
 
 Instructions for running the Genotyping Pipeline
 This will run both Zcall and Opticall on your post GenomeStudio 
@@ -13,6 +12,7 @@ REQUIREMENTS
 2) Zcall
 3) Opticall
 
+**********************
 
 RUNNING THE PIPELINE
 =============================================================================
@@ -32,4 +32,8 @@ RUNNING THE PIPELINE
 6) Execute the pipeline bash script.
 
 
-
+**********************
+### Contacts
+- Author: Amos Folarin                                         
+- Organisation: KCL/SLaM                                     
+- Email: amosfolarin@gmail.com     
