@@ -37,7 +37,7 @@ RUNNING THE PIPELINE
 
 **********************
 ### Contacts
-- Author: Amos Folarin                                         
+- Author: Amos Folarin, Hamel Patel, Stephen Newhouse                                    
 - Organisation: KCL/SLaM                                     
-- Email: amosfolarin@gmail.com     
-- 
+- Email: <amosfolarin@gmail.com>, <hamel.patel@kcl.ac.uk>, <stephen.j.newhouse@gmail.com>
+
