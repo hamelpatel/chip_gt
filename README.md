@@ -1,9 +1,9 @@
 Genotype Calling Pipeline
 ==============================================================================
 
-Instructions for running the Genotyping Pipeline
-This will run both Zcall and Opticall on your post GenomeStudio 
-Exome chip data
+Instructions for running the Genotyping Pipeline  
+This will run both Zcall and Opticall on your post GenomeStudio  
+Exome chip data  
 
 **********************
 
