@@ -6,7 +6,7 @@ Instructions for running the Genotyping Pipeline
 This will run both Zcall and Opticall on your post GenomeStudio 
 Exome chip data
 
----------------------------------REQUIREMENTS----------------------------
+REQUIREMENTS
 =============================================================================
 
 1) Sun Grid Engine
@@ -14,7 +14,7 @@ Exome chip data
 3) Opticall
 
 
------------------------------RUNNING THE PIPELINE------------------------
+RUNNING THE PIPELINE
 =============================================================================
 
 1) Read notes (GenomeStudio.SOP.v1.2.docx) on processing the data in GenomeStudio
