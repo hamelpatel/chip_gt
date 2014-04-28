@@ -1,27 +1,21 @@
-#########################################################################
-# -- Author: Amos Folarin                                               #
-# -- Organisation: KCL/SLaM                                             #
-# -- Email: amosfolarin@gmail.com                                       #
-#########################################################################
+-- Author: Amos Folarin                                               #
+-- Organisation: KCL/SLaM                                             #
+-- Email: amosfolarin@gmail.com                                       #
 
-
-#------------------------------------------------------------------------
-# Instructions for running the Genotyping Pipeline
-# This will run both Zcall and Opticall on your post GenomeStudio 
-# Exome chip data
-#------------------------------------------------------------------------
+Instructions for running the Genotyping Pipeline
+This will run both Zcall and Opticall on your post GenomeStudio 
+Exome chip data
 
 ---------------------------------REQUIREMENTS----------------------------
+=============================================================================
 
 1) Sun Grid Engine
 2) Zcall
 3) Opticall
 
 
-
-
-
 -----------------------------RUNNING THE PIPELINE------------------------
+=============================================================================
 
 1) Read notes (GenomeStudio.SOP.v1.2.docx) on processing the data in GenomeStudio
 2) Generate the GenomeStudio Report file (as required for by Zcall, parses this as input for both Zcall and Opticall rare callers):
