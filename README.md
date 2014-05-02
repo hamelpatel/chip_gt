@@ -20,19 +20,93 @@ REQUIREMENTS
 RUNNING THE PIPELINE
 =============================================================================
 
-1) Read notes (GenomeStudio.SOP.v1.2.docx) on processing the data in GenomeStudio  
-2) Generate the GenomeStudio Report file (as required for by Zcall, parses this as input for both Zcall and Opticall rare callers):  
+1.	Prior to running the pipeline, the genotype data should be processed in GenomeStudio as described by Illumina 			Exome Chip SOP v1.4. Following the SOP will produce the output file required by the pipeline. This SOP can 	be viewed at:
 
-	i) In GenomeStudio select 'Full Data Table' tab.
-	ii) Click on 'Column Chooser' icon.
-	iii) In Displayed Columns select 'Name', 'Chr','Position', and all your samples.
-	iv) In Displayed Subcolumns select 'GType', 'X' and 'Y'.
-	v) Hit OK then click on 'Export displayed data to a file' icon.
+	http://confluence.brc.iop.kcl.ac.uk:8090/display/PUB/Production+Version%3A+Illumina+Exome+Chip+SOP+v1.4
 
-3) Copy the template.workflow.sh into a working directory  
-4) Edit the paths as indicated in this script for your installations of Zcall and Opticall etc.  
-5) Specify the datapath and basename variables for the GenomeStudio Report generated in step (2)  
-6) Execute the pipeline bash script.  
+2.	Copy the output file from GenomeStudio into the working directory
+3.	Copy the bin folder into a bin directory
+4.	Copy Zcall and Opticall into a local directory
+5.	Copy the template.workflow.sh script into the working directory
+6.	Copy the Illumina chip manifest into the working directory.
+7.	Zcall has issues with SNP ID’s containing the phrase “SNP”. Therefore these ID’s should be changed to a temporary 	ID using the Unix command line:
+
+	sed -e 's/SNP/rs_temp/g' genomestudio_outputfile.report > pipeline_inputfile.report
+
+8.	Edit the paths in template.workflow.sh for:
+		a.exome_chip_bin = path to the bin folder
+		b.zcall_bin = path to folder containing Zcall
+		c.opticall_bin = path to folder containing Opticall
+		d.working_dir = path to where the output files will be created
+		e.manifest_file = path to illumina manifest file for the chip used for genotyping
+		f.data_path = path to pipeline_input.report file
+		g.basename = name of pipeline_inputfile (exclude .report extension here). This should be the file 				created in step 7.
+		9.Execute template.workflow.sh bash script
+
+
+**********************
+
+PIPELINE PROCESS
+=============================================================================
+
+1.	Run QC on input file
+		a.Calculate missingness across SNP’s
+		b.Calculate Hardy-Weinberg equilibrium 
+		c.Calculate missingness across samples
+		d.Remove samples with call rate below 98%
+		e.Remove SNPs with call rate below 95%
+		f.Only include SNP’s with minor allele frequency >= 0.05
+		g.Remove related samples (PI_hat > 0.1875)
+		h.Remove heterozygote samples (± 3 S.D)
+2.	Run Zcall and Opticall
+3.	Run QC on called genotypes
+		a.Calculate missingness across SNP’s
+		b.Calculate Hardy-Weinberg equilibrium 
+		c.Calculate missingness across samples
+4	Compare Zcall and Opticall SNP/Sample counts 
+
+
+**********************
+
+OUPUT FILES
+=============================================================================
+
+Amongst the numerous files created, the majority are Zcall/Opticall processing files. The plink format output files from Opticall and Zcall are:
+•	pipeline_inputfile_filt_Opticall_UA.bed
+•	pipeline_inputfile_filt_Opticall_UA.bim
+•	pipeline_inputfile_filt_Opticall_UA.fam
+•	pipeline_inputfile_filt_Zcall_UA.bed
+•	pipeline_inputfile_filt_Zcall_UA.bim
+•	pipeline_inputfile_filt_Zcall_UA.fam
+
+Other files of interest include:
+•	final_sample_callrate_exclude – list of samples with call rate below 98%
+•	final_sample_exclude – list of all samples removed prior to Zcall/Opticall processing
+•	pipeline_inputfile_plinkQC_01_poor_snp_callrate_exclude – list of SNP’s with call rate below 95%
+•	related_sample_exclude – list of samples removed due to relatedness
+•	het_outliers_sample_exclude  - list of samples removed due to heterozgosity (file only created if samples 			removed)
+•	pipeline_inputfile_filt_Zcalls_UA.frq - Zcall ouput file minor allele frequency (MAF) for each SNP
+•	pipeline_inputfile_filt_Zcalls_UA.hwe ¬– Zcall output file Hardy-Weinberg Equilibrium results
+•	pipeline_inputfile_filt_Zcalls_UA.imiss – Zcall output file sample missing rate across SNP’s
+•	pipeline_inputfile_filt_Zcalls_UA.lmiss – Zcall output file SNP missing rate across samples
+•	pipeline_inputfile_filt_Opticall_UA.frq - Opticall output file minor allele frequency (MAF) for each SNP
+•	pipeline_inputfile_filt_Opticall_UA.hwe - Opticall output file Hardy-Weinberg Equilibrium results
+•	pipeline_inputfile_filt_Opticall_UA.imiss - Opticall output file sample missing rate across SNP’s
+•	pipeline_inputfile_filt_Opticall_UA.lmiss - Opticall output file SNP missing rate across samples
+•	zcall_v_opticall_sample_diff_counts.txt – difference in Zcall/Opticall genotype calls across samples
+•	zcall_v_opticall_snp_diff_counts.txt -  difference in Zcall/Opticall genotype calls across SNP
+•	*log -  plink log files for procedures executed in plink.
+
+**********************
+
+ERROR CHECKING
+=============================================================================
+
+On the command line use “ll *.e*” to view all sun grid engine job errors. If any of these files have data, view the file to see at which command line the error has occurred. It is common to see two error files:
+•	concat-opticall.e1165215
+•	opticall2plink.e1165216
+both being produced by lack of XY SNPs within the data.
+
 
 
 **********************
