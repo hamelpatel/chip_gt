@@ -34,14 +34,14 @@ RUNNING THE PIPELINE
 	sed -e 's/SNP/rs_temp/g' genomestudio_outputfile.report > pipeline_inputfile.report
 
 8.	Edit the paths in template.workflow.sh for:
-		a.exome_chip_bin = path to the bin folder
-		b.zcall_bin = path to folder containing Zcall
-		c.opticall_bin = path to folder containing Opticall
-		d.working_dir = path to where the output files will be created
-		e.manifest_file = path to illumina manifest file for the chip used for genotyping
-		f.data_path = path to pipeline_input.report file
-		g.basename = name of pipeline_inputfile (exclude .report extension here). This should be the file 				created in step 7.
-		9.Execute template.workflow.sh bash script
+		a.	exome_chip_bin = path to the bin folder
+		b.	zcall_bin = path to folder containing Zcall
+		c.	opticall_bin = path to folder containing Opticall
+		d.	working_dir = path to where the output files will be created
+		e.	manifest_file = path to illumina manifest file for the chip used for genotyping
+		f.	data_path = path to pipeline_input.report file
+		g.	basename = name of pipeline_inputfile (exclude .report extension here). This should be the file 				created in step 7.
+		9.	Execute template.workflow.sh bash script
 
 
 **********************
@@ -50,19 +50,19 @@ PIPELINE PROCESS
 =============================================================================
 
 1.	Run QC on input file
-		a.Calculate missingness across SNP’s
-		b.Calculate Hardy-Weinberg equilibrium 
-		c.Calculate missingness across samples
-		d.Remove samples with call rate below 98%
-		e.Remove SNPs with call rate below 95%
-		f.Only include SNP’s with minor allele frequency >= 0.05
-		g.Remove related samples (PI_hat > 0.1875)
-		h.Remove heterozygote samples (± 3 S.D)
+		a.	Calculate missingness across SNP’s
+		b.	Calculate Hardy-Weinberg equilibrium 
+		c.	Calculate missingness across samples
+		d.	Remove samples with call rate below 98%
+		e.	Remove SNPs with call rate below 95%
+		f.	Only include SNP’s with minor allele frequency >= 0.05
+		g.	Remove related samples (PI_hat > 0.1875)
+		h.	Remove heterozygote samples (± 3 S.D)
 2.	Run Zcall and Opticall
 3.	Run QC on called genotypes
-		a.Calculate missingness across SNP’s
-		b.Calculate Hardy-Weinberg equilibrium 
-		c.Calculate missingness across samples
+		a.	Calculate missingness across SNP’s
+		b.	Calculate Hardy-Weinberg equilibrium 
+		c.	Calculate missingness across samples
 4	Compare Zcall and Opticall SNP/Sample counts 
 
 
