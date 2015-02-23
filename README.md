@@ -74,7 +74,7 @@ PIPELINE PROCESS
 
 	-	Remove SNPs with call rate below 95%
 
-	-	Remove related samples (PI_hat > 0.1875)
+	-	Remove related samples (PI_hat > 0.1875) (if project has known intended related samples, this process 		should be hashed out, to avoid removal of samples)
 
 	-	Remove heterozygote samples (± 3 S.D)
 
