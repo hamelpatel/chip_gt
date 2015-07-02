@@ -54,7 +54,7 @@ RUNNING THE PIPELINE
 
 	-	basename = name of pipeline_inputfile (exclude .report extension here). 
 
-10..	Execute template.workflow.sh bash script
+10..	Execute "exome_chip.workflow.version_2.0.sh" bash script
 
 
 **********************
@@ -72,13 +72,15 @@ PIPELINE PROCESS
 
 	-	Remove samples with call rate below 98%
 
-	-	Remove SNPs with call rate below 95%
+	-	Remove SNPs zeroed in during the GenomeStudio stage and multi-mapping SNPs
 
-	-	Remove related samples (PI_hat > 0.1875) (if project has known intended related samples, this process 		should be hashed out, to avoid removal of samples)
+	-	Identify related samples (samples not removed, PI_hat > 0.1875) 
 
-	-	Remove heterozygote samples (± 3 S.D)
-
-2.	Run Zcall and Opticall
+	-	Identify heterozygote samples (samples not removed, ± 3 S.D)
+	
+	-	Identify duplicate samples
+	
+2.	Run Zcall
 
 3.	Run QC on called genotypes
 
@@ -87,9 +89,8 @@ PIPELINE PROCESS
 	-	Calculate Hardy-Weinberg equilibrium 
 
 	-	Calculate missingness across samples
-
-4.	Compare Zcall and Opticall SNP/Sample counts 
-
+	
+	-	check clinical Gneder against gentical gender and identify any annomolies	
 
 **********************
 
