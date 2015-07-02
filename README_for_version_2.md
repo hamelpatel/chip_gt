@@ -44,15 +44,15 @@ RUNNING THE PIPELINE
 
 	-	working_dir = path to where the output files will be created
 
-	-	manifest_file = file name for illumina manifest file for the chip used for genotyping	
+	-	manifest_file = file name for illumina manifest file for the chip used for genotyping. The file copied in step 6.	
 	
-	-	multi_mapping_probes = file name containing SNP ids to remove due to targetting multiple locations of the genome
+	-	multi_mapping_probes = file name containing SNP ids to remove due to targetting multiple locations of the genome. The file copied in step 7.
 
-	-	Clinical_gender= file name containing clinical gender
+	-	Clinical_gender= file name containing clinical gender. The file copied in step 8.
 
 	-	data_path = path to pipeline_input.report file
 
-	-	basename = name of pipeline_inputfile (exclude .report extension here). This should be the file created in step 7.
+	-	basename = name of pipeline_inputfile (exclude .report extension here). 
 
 10..	Execute template.workflow.sh bash script
 
