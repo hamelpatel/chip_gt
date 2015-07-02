@@ -136,6 +136,7 @@ The main workfow script is located within the '"scripts"' folder.
 The genotype chip's manifest and update allele file is located within the '"manifest"' folder.
 The clinical gender used to update the plink files are located within the '"clincial_gender"' folder.
 SNP IDs identified as multi-mapping or problematic during the GenomeStudio stage are located in the '"snp_information"' folder.
+A copy of the genomestudio file is locted in the working directory ('"${report_file}.report"') along with a QC'd file used for zcall input ('"${report_file}.report_zcall_input"').
 Het, related, duplicate and samples with low call rate are located within '"sample_information"' folder." >> README_summary_report
 
 
