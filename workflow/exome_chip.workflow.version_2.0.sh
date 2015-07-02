@@ -101,7 +101,7 @@ qsub -q ${queue_name} -N create_allele_update_file ${exome_chip_bin}/create_upda
 echo -e "\nMaking a local copy of the report file"
 # input: data location for gs.report
 # output: working dir copy of gs.report
--------------------------------------------------------------------------
+#-------------------------------------------------------------------------
 
 cp -v ${data_path}/${basename}.report ${working_dir}/${basename}.report
 
@@ -204,7 +204,7 @@ qsub -q ${queue_name} -N basic_post_qc -hold_jid update-alleles_zc ${exome_chip_
 
 # SUMMARY REPORT
 
-qsub q ${queue_name} -N summary_report -hold_jid basic_post_qc ${exome_chip_bin}/create_summary_report.sh ${working_dir}/${basename} ${multi_mapping_probes}
+qsub -q ${queue_name} -N summary_report -hold_jid basic_post_qc ${exome_chip_bin}/create_summary_report.sh ${working_dir}/${basename} ${multi_mapping_probes}
 
 # CLEAN UP DIRECTORY
 
