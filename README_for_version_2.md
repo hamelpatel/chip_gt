@@ -1,4 +1,4 @@
-Genotype Calling Pipeline
+Genotype Calling Pipeline VERSION 2.0
 ==============================================================================
 
 Instructions for running the Genotyping Pipeline  
@@ -6,8 +6,6 @@ This will run Zcall on your post GenomeStudio
 Exome chip data  
 
 **********************
-
-Version 2.0
 
 REQUIREMENTS
 =============================================================================
@@ -30,31 +28,33 @@ RUNNING THE PIPELINE
 
 4.	Copy Zcall into a local directory
 
-5.	Copy the exome_chip.workflow.version_2.0.sh script into the working directory
+5.	Copy the "exome_chip.workflow.version_2.0.sh" script into the working directory
 
 6.	Copy the Illumina chip manifest into the working directory.
 
-7.	Zcall has issues with SNP ID’s containing the phrase “SNP”. Therefore these ID’s should be changed to a temporary 	ID using the Unix command line:
+7.	Copy the multi-mapping snp file into the working directory. see https://github.com/KHP-Informatics/illumina-array-protocols
+	
+8.	Copy the Clinical gender information to working directory. should be in file containing no header, sample ID followed by gender in tab delimited format.
 
-	sed -e 's/SNP/rs_temp/g' genomestudio_outputfile.report > pipeline_inputfile.report
-
-8.	Edit the paths in template.workflow.sh for:
+9.	Edit the paths in "exome_chip.workflow.version_2.0.sh" for:
 
 	-	exome_chip_bin = path to the bin folder
 
 	-	zcall_bin = path to folder containing Zcall
 
-  	-	opticall_bin = path to folder containing Opticall
-
 	-	working_dir = path to where the output files will be created
 
-	-	manifest_file = path to illumina manifest file for the chip used for genotyping	
+	-	manifest_file = file name for illumina manifest file for the chip used for genotyping	
+	
+	-	multi_mapping_probes = file name containing SNP ids to remove due to targetting multiple locations of the genome
+
+	-	Clinical_gender= file name containing clinical gender
 
 	-	data_path = path to pipeline_input.report file
 
 	-	basename = name of pipeline_inputfile (exclude .report extension here). This should be the file created in step 7.
 
-9.	Execute template.workflow.sh bash script
+10..	Execute template.workflow.sh bash script
 
 
 **********************
