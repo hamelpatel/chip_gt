@@ -116,7 +116,7 @@ echo -e "\nTotal number of Samples after QC: $total_sample_number_after_qc" >> R
 
 echo -e "\nNumber of duplicate samples: $number_of_duplicate_samples		...see file: '"sample_information/${report_file}.report_duplicate_sample_id_temp_changes"' for sample IDs " >> README_summary_report
 
-echo -e "\nNumber of samples to be aware of due to heterozygote variability: $number_of_het_samples		...see file '"sample_information/het_outliers_sample_exclude"' for sample IDs" >> README_summary_report
+echo -e "\nNumber of samples to be aware of due to heterozygosity: $number_of_het_samples		...see file '"sample_information/het_outliers_sample_exclude"' for sample IDs" >> README_summary_report
 
 echo -e "\nNumber of related samples identified: $number_of_related_samples		...see file '"sample_information/related_sample_exclude"' for sample IDs" >> README_summary_report
 
