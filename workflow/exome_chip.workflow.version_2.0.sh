@@ -54,7 +54,7 @@
 
 #-------------------------------------------------------------------------------------------------------------------------------#
 
-echo " START PIPELINE " `date`
+echo -e "\n START PIPELINE " `date`
 
 #------------------------------------------------------------------------
 # Some environmental variables required for child processes (all) and 
@@ -63,7 +63,7 @@ echo " START PIPELINE " `date`
 
 # scripts bins pathed -- use git repo versions
 
-exome_chip_bin="/home/hpatelbrc/workspace/pipelines/exome_chip/bin/"
+exome_chip_bin="/home/hpatelbrc/workspace/pipelines/chip_gt/bin/"
 
 zcall_bin="/share/apps/zcall_current/Version3_GenomeStudio/bin/"
 
@@ -103,7 +103,7 @@ echo -e "\nMaking a local copy of the report file"
 # output: working dir copy of gs.report
 #-------------------------------------------------------------------------
 
-cp -v ${data_path}/${basename}.report ${working_dir}/${basename}.report
+cp ${data_path}/${basename}.report ${working_dir}/${basename}.report
 
 #------------------------------------------------------------------------
 # PREPARE REPORT FILE
