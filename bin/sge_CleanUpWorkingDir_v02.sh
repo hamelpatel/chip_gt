@@ -27,7 +27,6 @@ mkdir ${working_dir}/manifest
 mkdir ${working_dir}/clincial_gender
 mkdir ${working_dir}/snp_information
 mkdir ${working_dir}/sample_information
-mkdir ${working_dir}/summary_report
 
 echo "moving Final Zcalls genotypes to   " ${working_dir}/FINAL_ZCALL/ " AND " ${working_dir}/FINAL_OPTICALL/
 
@@ -39,7 +38,7 @@ mv -v ${working_dir}/gender_missmatches ${working_dir}/FINAL_ZCALL/
 mv -v ${working_dir}/*report_duplicate_sample_id_temp_changes ${working_dir}/sample_information/
 cp ${working_dir}/het_outliers_sample_exclude ${working_dir}/sample_information/
 cp ${working_dir}/related_sample_exclude ${working_dir}/sample_information/
-cp ${working_dir}/gender_missmatches ${working_dir}/sample_information/
+cp ${working_dir}/FINAL_ZCALL/gender_missmatches ${working_dir}/sample_information/
 cp ${working_dir}/samples_with_low_callrate_to_exclude ${working_dir}/sample_information/
 
 ##
