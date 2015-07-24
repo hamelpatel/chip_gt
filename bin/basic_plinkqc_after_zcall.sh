@@ -31,10 +31,17 @@ clinical_gender=${2}
 
 dos2unix ${clinical_gender}
 
+# remove duplicate samples - 
+
+cut -f1 ${clinical_gender} | sort | uniq -c | awk '$1>1' | awk '{print $2}' > ${clinical_gender}_duplicate_ids_to_exclude_temp
+
+fgrep -wvf ${clinical_gender}_duplicate_ids_to_exclude_temp ${clinical_gender} > ${clinical_gender}_no_dups
+
 awk 'BEGIN {OFS="\t"} \
 	{if($2=="Male" || $2=="M" || $2=="male" || $2=="m" || $2=="MALE") print $1, $1, "1" ; \
 	else if($2=="Female" || $2=="F" || $2=="female" || $2=="f" || $2=="FEMALE") print $1, $1, "2" ; \
-	else print $1, $1, "0"}' ${clinical_gender} > ${clinical_gender}_plink_input
+	else print $1, $1, "0"}' ${clinical_gender}_no_dups > ${clinical_gender}_plink_input
+
 
 plink2 --noweb \
 --bfile ${zcall_bed}_filt_Zcalls_UA \
