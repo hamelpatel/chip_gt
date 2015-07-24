@@ -154,7 +154,7 @@ echo -e "# BRC Bioinformatics Core: Genotyping Summary Report
 |----------|---------|
 |**Author**| Hamel Patel, <hamel.patel@kcl.ac.uk>|
 |**Date:** |$(date)|
-|**Version:** |exome\_chip.workflow.version\_2.0.sh|
+|**Pipeline Version:** |exome\_chip.workflow.version\_2.0.sh|
 |**github:** |https://github.com/KHP-Informatics/chip_gt|
 |**SOP:** | https://confluence.brc.iop.kcl.ac.uk:8493/display/PUB/Production+Version%3A+Illumina+Exome+Chip+SOP+v1.4|
 
@@ -290,7 +290,7 @@ Het, related, duplicate and samples with low call rate are located within _sampl
 ##
 
 
-
+/share/apps/python_2.7/bin/grip README_summary_report.mkd --export README_summary_report.html
 
 
 
