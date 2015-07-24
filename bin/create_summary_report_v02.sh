@@ -55,7 +55,7 @@ number_of_het_samples=$(wc -l "het_outliers_sample_exclude" | awk '{print $1}')
 ##	NUMBER OF RELATED SAMPLES
 ##
 
-number_of_related_samples_temp=$(wc -l "related_sample_exclude" | awk '{print $1}')
+number_of_related_samples_temp=$(sort related_sample_exclude | uniq -c | wc -l)
 
 number_of_related_samples=$(echo $(( $number_of_related_samples_temp - 1)))
 
