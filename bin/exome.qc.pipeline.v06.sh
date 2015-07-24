@@ -21,18 +21,37 @@ plink2 --noweb \
 --tfile ${pedfile} \
 --exclude ${Y_chromo_snps} \
 --make-bed \
---out ${bedfile}.plinkQC_01;
+--out ${bedfile}.plinkQC_before_qc;
 
 
 ##
 ##	2.RUN BASIC QC CHECKS - MISSINGNESS, FREQ, HARDY
 ##
 
+echo -e "\n- Running initial qc check -"
+for my_qc in missing freq hardy;do
+plink2 --noweb --bfile ${bedfile}.plinkQC_before_qc --${my_qc} --out ${bedfile}.plinkQC_before_qc;
+done
+
+##
+##	2.1 - REMOVE ALL SAMPLES WHICH HAVE BEEN ZEROED IN GENOMESTUDIO STAGE - 1.E CALL RATE ZERO - snps which have been zeroed in genomestudio stage have been removed in earlier stages - implemented 24/7/2015 H.P
+##
+
+awk 'NR>1 {if ($6==1) print $1}' cat ${bedfile}plinkQC_before_qc.lmiss > samples_zeroed_in_genomestudio
+
+#remove low call rate samples
+plink2 --noweb \
+--bfile ${bedfile}.plinkQC_before_qc \
+--make-bed \
+--out ${bedfile}.plinkQC_01 \
+--remove samples_zeroed_in_genomestudio;
+
+# run basic qc
+
 echo -e "\n- Running basic qc 01 -"
 for my_qc in missing freq hardy;do
 plink2 --noweb --bfile ${bedfile}.plinkQC_01 --${my_qc} --out ${bedfile}.plinkQC_01;
 done
-
 
 ##
 ##      3.QC STAGE PHASE 1 - ID AND REMOVE SNPS WITH CALL RATE < 0.9
