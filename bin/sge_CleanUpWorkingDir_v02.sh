@@ -71,7 +71,7 @@ mv -v ${working_dir}/*.plinkQC_03* ${working_dir}/plink_qc_tmp/
 mv -v ${working_dir}/*_exclude ${working_dir}/plink_qc_tmp/
 mv -v ${working_dir}/*.plinkQC_04* ${working_dir}/plink_qc_tmp/
 mv -v ${working_dir}/*.plinkQC_05* ${working_dir}/plink_qc_tmp/
-
+mv -v ${working_dir}/samples_zeroed_in_genomestudio ${working_dir}/plink_qc_tmp/
 
 mv -v ${working_dir}/*.bed ${working_dir}/plink_qc_tmp/
 mv -v ${working_dir}/*.bim ${working_dir}/plink_qc_tmp/

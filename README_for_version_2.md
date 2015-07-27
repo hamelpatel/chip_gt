@@ -54,7 +54,7 @@ RUNNING THE PIPELINE
 
 	-	basename = name of pipeline_inputfile (exclude .report extension here). 
 
-10..	Execute "exome_chip.workflow.version_2.0.sh" bash script
+10.	Execute "exome_chip.workflow.version_2.0.sh" bash script
 
 
 **********************
@@ -62,90 +62,100 @@ RUNNING THE PIPELINE
 PIPELINE PROCESS
 =============================================================================
 
-1.	Run QC on input file
+1.	Run initial QC on input file - Working on GenomeStudio output file
 
-	-	Calculate missingness across SNP’s
+	-	Remove SNP where call rate is NC for all samples (SNPs which have been zeroed in genomestudio phase)
 
-	-	Calculate Hardy-Weinberg equilibrium 
+	-	Remove Multi-mapping SNPs based on SNP ID provided in multi-mapping snp file
 
-	-	Calculate missingness across samples
+	-	Convert SNP IDs conting "SNP" to "rs_temp". (Zcall has issues with SNP IDs contining "SNP")
 
-	-	Remove samples with call rate below 98%
+	-	Rename any duplicate sample IDs to a unique ID. Appends "duplicate_ID_1" to end of duplicate ID. If multiple duplicates, the next duplicate will be labelled "duplicate_ID_2", etc.
 
-	-	Remove SNPs zeroed in during the GenomeStudio stage and multi-mapping SNPs
+	-	Working on only autosomal chromosomes
 
-	-	Identify related samples (samples not removed, PI_hat > 0.1875) 
+			-  	plot of missingness
+				
+			-	Samples with a call rate 0 removed (samples whcih have been zeroed in GenomeStudio phase)
+			
+			-	call rate calculated for samples and SNPs
+			
+			- 	SNP with call rate < 0.9 removed
 
-	-	Identify heterozygote samples (samples not removed, ± 3 S.D)
+			-       call rate calculated for samples and SNPs
+
+			- 	Samples with call rate < 0.9 removed
+
+                        -       call rate calculated for samples and SNPs
+
+                        -       SNP with call rate < 0.95 removed
+
+                        -       call rate calculated for samples and SNPs
+
+                        -       Samples with call rate < 0.98 removed
+
+			- 	plot of missingness
+
+			- 	List of rare/common SNP IDs created
+
+			-	LD prune
+			
+			-	Identify related samples (samples not removed, PI_hat > 0.1875)
+
+			-	Identify heterozygote samples (samples not removed, ± 3 S.D)
+
 	
-	-	Identify duplicate samples
-	
-2.	Run Zcall
+2.	Runing Zcall - Working on GenomeStudio output file
+
+	-	Remove only samples with a call rate below 0.98 (based on samples Ids identified in initial QC stage)
+
+	-	Run Zcall
 
 3.	Run QC on called genotypes
 
-	-	Calculate missingness across SNP’s
+	-	Rename "rs_temp" IDs back to "SNP"
 
-	-	Calculate Hardy-Weinberg equilibrium 
+	- 	Rename "duplicate_ID" back to original ID	
 
-	-	Calculate missingness across samples
+	-	call rate calculated for samples and SNPs
 	
-	-	check clinical Gneder against gentical gender and identify any annomolies	
+	-	Clinical Gender information introduced into PLINK file (duplicate samples gender not updated)
+
+	-	Id gender anomolies where clinical gender states M/F and genetical gender is different (excludes unknown)
+
+4.	Create Summary Report
 
 **********************
 
 OUPUT FILES
 =============================================================================
 
-Amongst the numerous files created, the majority are Zcall/Opticall processing files. The plink format output files from Opticall and Zcall are:
 
--	pipeline_inputfile_filt_Opticall_UA.bed
-
--	pipeline_inputfile_filt_Opticall_UA.bim
-
--	pipeline_inputfile_filt_Opticall_UA.fam
-
--	pipeline_inputfile_filt_Zcall_UA.bed
-
--	pipeline_inputfile_filt_Zcall_UA.bim
-
--	pipeline_inputfile_filt_Zcall_UA.fam
+The final output file is in PLINK format and is found within the "FINAL_ZCALL" folder. 
 
 
+SNP IDs removed due to failing genomestudio stage can be found in "snp_information/SNP_zeroed_in_genomestudio_to_remove"
 
-Other files of interest include:
+Samples IDs removed due to call rate below 98% can be found in "sample_information/samples_with_low_callrate_to_exclude"
 
--	final_sample_callrate_exclude – list of samples with call rate below 98%
+Duplicate sample IDs (if any) can be found in "sample_information/*_duplicate_sample_id_temp_changes"
 
--	final_sample_exclude – list of all samples removed prior to Zcall/Opticall processing
+Samples to be aware of due to heterozygosity can be found in "sample_information/het_outliers_sample_exclude"
 
--	pipeline_inputfile_plinkQC_01_poor_snp_callrate_exclude – list of SNP’s with call rate below 95%
+Related samples identified can be found in "sample_information/related_sample_exclude"
 
--	related_sample_exclude – list of samples removed due to relatedness
+Gender missmatches can be found in "sample_information/gender_missmatches"
 
--	het_outliers_sample_exclude  - list of samples removed due to heterozgosity (file only created if samples 			removed)
 
--	pipeline_inputfile_filt_Zcalls_UA.frq - Zcall ouput file minor allele frequency (MAF) for each SNP
+All processing files for Zcall are located within the "zcall_proccessing" folder.
+All sungrid processing files and error logs are located within the "sge_out" folder.
+All PLINK QC processing files are located within the "plink_qc_tmp folder".
+The main workfow script is located within the "scripts" folder.
+The genotype chips manifest and update allele file is located within the "manifest" folder.
+The clinical gender used to update the plink files are located within the "clincial_gender" folder.
+SNP IDs identified as multi-mapping or problematic during the GenomeStudio stage are located in the "snp_information" folder.
 
--	pipeline_inputfile_filt_Zcalls_UA.hwe ¬– Zcall output file Hardy-Weinberg Equilibrium results
 
--	pipeline_inputfile_filt_Zcalls_UA.imiss – Zcall output file sample missing rate across SNP’s
-
--	pipeline_inputfile_filt_Zcalls_UA.lmiss – Zcall output file SNP missing rate across samples
-
--	pipeline_inputfile_filt_Opticall_UA.frq - Opticall output file minor allele frequency (MAF) for each SNP
-
--	pipeline_inputfile_filt_Opticall_UA.hwe - Opticall output file Hardy-Weinberg Equilibrium results
-
--	pipeline_inputfile_filt_Opticall_UA.imiss - Opticall output file sample missing rate across SNP’s
-
--	pipeline_inputfile_filt_Opticall_UA.lmiss - Opticall output file SNP missing rate across samples
-
--	zcall_v_opticall_sample_diff_counts.txt – difference in Zcall/Opticall genotype calls across samples
-
--	zcall_v_opticall_snp_diff_counts.txt -  difference in Zcall/Opticall genotype calls across SNP
-
--	*log -  plink log files for procedures executed in plink.
 
 **********************
 
@@ -153,12 +163,6 @@ ERROR CHECKING
 =============================================================================
 
 On the command line use “ll *.e*” to view all sun grid engine job errors. If any of these files have data, view the file to see at which command line the error has occurred. It is common to see two error files:
-
--	concat-opticall.e1165215
-
--	opticall2plink.e1165216
-
-both being produced by lack of XY SNPs within the data.
 
 
 
