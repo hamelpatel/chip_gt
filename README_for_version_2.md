@@ -113,6 +113,8 @@ PIPELINE PROCESS
 
 3.	Run QC on called genotypes
 
+	- 	update all allele coding to Illumina top strand
+
 	-	Rename "rs_temp" IDs back to "SNP"
 
 	- 	Rename "duplicate_ID" back to original ID	

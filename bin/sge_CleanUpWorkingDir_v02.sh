@@ -84,7 +84,7 @@ mv -v ${working_dir}/*.tfam ${working_dir}/plink_qc_tmp/
 mv -v ${working_dir}/*.tped ${working_dir}/plink_qc_tmp/
 mv -v ${working_dir}/*.ped ${working_dir}/plink_qc_tmp/
 mv -v ${working_dir}/*.pdf ${working_dir}/plink_qc_tmp/
-
+mv -v ${working_dir}/*plinkQC_before_qc* ${working_dir}/plink_qc_tmp/
 
 ##
 echo "moving scripts to " ${working_dir}/scripts/

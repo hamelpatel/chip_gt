@@ -37,7 +37,7 @@ done
 ##	2.1 - REMOVE ALL SAMPLES WHICH HAVE BEEN ZEROED IN GENOMESTUDIO STAGE - 1.E CALL RATE ZERO - snps which have been zeroed in genomestudio stage have been removed in earlier stages - implemented 24/7/2015 H.P
 ##
 
-awk 'NR>1 {if ($6==1) print $1}' ${bedfile}.plinkQC_before_qc.lmiss > samples_zeroed_in_genomestudio
+awk 'NR>1 {if ($6==1) print $1, $1}' ${bedfile}.plinkQC_before_qc.imiss > samples_zeroed_in_genomestudio
 
 #remove low call rate samples
 plink2 --noweb \
