@@ -76,7 +76,7 @@ PIPELINE PROCESS
 
 			-  	plot of missingness
 				
-			-	Samples with a call rate 0 removed (samples whcih have been zeroed in GenomeStudio phase)
+			-	Samples with a call rate 0 removed (samples which have been zeroed in GenomeStudio phase)
 			
 			-	call rate calculated for samples and SNPs
 			
