@@ -69,7 +69,7 @@ cat ${zcall_bed}.report_duplicate_sample_id_temp_changes | while read line
 	do
 	changed_id=$(echo $line | awk '{print $6}')
 	old_id=$(echo $line | awk '{print $4}')
-	sed "s/${changed_id}/${old_id}/" ${zcall_bed}_zcall_final.fam > ${zcall_bed}_zcall_final.fam_temp
+	sed "s/${changed_id}/${old_id}/g" ${zcall_bed}_zcall_final.fam > ${zcall_bed}_zcall_final.fam_temp
 	mv ${zcall_bed}_zcall_final.fam_temp ${zcall_bed}_zcall_final.fam
 	echo $changed_id
 	echo $old_id
