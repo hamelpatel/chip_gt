@@ -16,6 +16,7 @@
 ####                                                                                                                                  ####
 ##########################################################################################################################################
 
+module add general/python/3.5.1
 
 report_file=${1}
 multimapping_snp_file=${2}
@@ -289,7 +290,7 @@ Het, related, duplicate and samples with low call rate are located within _sampl
 ##
 
 
-/users/k1223459/brc_scratch/Genotype/chip_gt/grip README_summary_report.mkd --export README_summary_report.html
+grip README_summary_report.mkd --export README_summary_report.html
 
 
 

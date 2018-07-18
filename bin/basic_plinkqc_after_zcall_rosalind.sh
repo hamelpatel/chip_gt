@@ -16,6 +16,7 @@
 
 
 module add bioinformatics/plink2/1.90b3.38
+module add utiltities/dos2unix/7.4.0
 
 zcall_bed=${1}
 clinical_gender=${2}
